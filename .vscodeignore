@@ -1,0 +1,10 @@
+.vscode/**
+.claude/**
+.codemie/**
+src/**
+node_modules/**
+out/**/*.js.map
+esbuild.mjs
+tsconfig.json
+.vscodeignore
+*.toon
