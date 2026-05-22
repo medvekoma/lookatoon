@@ -1,4 +1,4 @@
-# lookAtoon - VS Code TOON viewer
+# look@toon - VS Code TOON viewer
 
 A VS Code extension that renders [`.toon` files](https://github.com/toon-format/spec) as interactive tables instead of raw text.
 
@@ -8,6 +8,10 @@ A VS Code extension that renders [`.toon` files](https://github.com/toon-format/
 - Right-aligns numeric and formatted-number columns (e.g. `3.3M`, `77.7K`)
 - Renders `null` values as muted italic `null`
 - Handles all valid TOON key and value types: strings, numbers, booleans, null
+
+Here's how a `.toon` file looks when opened in VS Code:
+
+![look@toon rendering a .toon file](example.png)
 
 ## Usage
 

@@ -1,0 +1,14 @@
+
+Properties:
+  year: 2026
+  month: 6
+  day: 15
+Country[4]{code,name,population,capital}:
+  JP,Japan,125800000,Tokyo
+  US,United States,331000000,Washington D.C.
+  DE,Germany,83000000,Berlin
+  FR,France,67000000,Paris
+Fruit[3]{name,color,taste}:
+  Apple,Red,Sweet
+  Lemon,Yellow,Sour
+  Grape,Purple,Sweet

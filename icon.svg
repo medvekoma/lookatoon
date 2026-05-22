@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <clipPath id="back-clip">
+      <rect x="6" y="6" width="108" height="76" rx="6"/>
+    </clipPath>
+    <clipPath id="front-clip">
+      <rect x="16" y="46" width="108" height="76" rx="6"/>
+    </clipPath>
+  </defs>
+
+  <!-- Back table: x=6 y=6 -->
+  <g>
+    <g clip-path="url(#back-clip)">
+      <rect x="6"  y="6"  width="108" height="76" fill="#252540"/>
+      <rect x="6"  y="6"  width="36"  height="22" fill="#3b82f6"/>
+      <rect x="42" y="6"  width="36"  height="22" fill="#a855f7"/>
+      <rect x="78" y="6"  width="36"  height="22" fill="#10b981"/>
+      <rect x="6"  y="55" width="108" height="27" fill="#2a2a46"/>
+    </g>
+    <rect x="6" y="6" width="108" height="76" rx="6" fill="none" stroke="#404060" stroke-width="1.5"/>
+    <line x1="42" y1="6"  x2="42"  y2="82" stroke="#404060" stroke-width="1"/>
+    <line x1="78" y1="6"  x2="78"  y2="82" stroke="#404060" stroke-width="1"/>
+    <line x1="6"  y1="28" x2="114" y2="28" stroke="#404060" stroke-width="1"/>
+    <line x1="6"  y1="55" x2="114" y2="55" stroke="#404060" stroke-width="1"/>
+    <rect x="11" y="39" width="24" height="5" rx="2.5" fill="#5a5a8a"/>
+    <rect x="47" y="39" width="23" height="5" rx="2.5" fill="#5a5a8a"/>
+    <rect x="83" y="39" width="20" height="5" rx="2.5" fill="#5a5a8a"/>
+    <rect x="11" y="65" width="19" height="5" rx="2.5" fill="#5a5a8a"/>
+    <rect x="47" y="65" width="26" height="5" rx="2.5" fill="#5a5a8a"/>
+    <rect x="83" y="65" width="17" height="5" rx="2.5" fill="#5a5a8a"/>
+  </g>
+
+  <!-- Front table: x=16 y=46 (bottom at y=122, symmetric 6px margin) -->
+  <g clip-path="url(#front-clip)">
+    <rect x="16"  y="46" width="108" height="76" fill="#252540"/>
+    <rect x="16"  y="46" width="36"  height="22" fill="#3b82f6"/>
+    <rect x="52"  y="46" width="36"  height="22" fill="#a855f7"/>
+    <rect x="88"  y="46" width="36"  height="22" fill="#10b981"/>
+    <rect x="16"  y="95" width="108" height="27" fill="#2a2a46"/>
+  </g>
+  <rect x="16" y="46" width="108" height="76" rx="6" fill="none" stroke="#606080" stroke-width="1.5"/>
+  <line x1="52" y1="46"  x2="52"  y2="122" stroke="#606080" stroke-width="1"/>
+  <line x1="88" y1="46"  x2="88"  y2="122" stroke="#606080" stroke-width="1"/>
+  <line x1="16" y1="68"  x2="124" y2="68"  stroke="#606080" stroke-width="1"/>
+  <line x1="16" y1="95"  x2="124" y2="95"  stroke="#606080" stroke-width="1"/>
+  <rect x="21" y="79" width="24" height="5" rx="2.5" fill="#7070a0"/>
+  <rect x="57" y="79" width="23" height="5" rx="2.5" fill="#7070a0"/>
+  <rect x="93" y="79" width="20" height="5" rx="2.5" fill="#7070a0"/>
+  <rect x="21" y="106" width="19" height="5" rx="2.5" fill="#7070a0"/>
+  <rect x="57" y="106" width="26" height="5" rx="2.5" fill="#7070a0"/>
+  <rect x="93" y="106" width="17" height="5" rx="2.5" fill="#7070a0"/>
+</svg>
