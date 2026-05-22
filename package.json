@@ -1,6 +1,6 @@
 {
   "name": "lookatoon",
-  "displayName": "lookAtoon - VS Code TOON viewer",
+  "displayName": "look@toon - TOON file viewer",
   "description": "Displays .toon files in a tabular format",
   "version": "0.1.0",
   "publisher": "medvekoma",
@@ -12,6 +12,7 @@
   "engines": {
     "vscode": "^1.74.0"
   },
+  "icon": "icon.png",
   "categories": [
     "Other"
   ],
@@ -33,7 +34,7 @@
     "customEditors": [
       {
         "viewType": "toon.tableView",
-        "displayName": "TOON Table View",
+        "displayName": "look@toon Viewer",
         "selector": [
           {
             "filenamePattern": "*.toon"
