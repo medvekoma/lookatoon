@@ -19,6 +19,7 @@ export type ToonSection = PropertiesSection | TableSection;
 
 export interface ToonDocument {
   sections: ToonSection[];
+  error?: string;
 }
 
 function isObject(v: JsonValue): v is Record<string, JsonValue> {
@@ -40,13 +41,15 @@ export function parseToon(text: string): ToonDocument {
   let decoded: JsonValue;
   try {
     decoded = decode(text);
-  } catch {
-    return { sections: [] };
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    return { sections: [], error: `Could not parse TOON file: ${msg}` };
   }
 
-  if (!isObject(decoded)) return { sections: [] };
+  if (!isObject(decoded)) return { sections: [], error: 'Could not parse TOON file: top-level value is not an object' };
 
   const sections: ToonSection[] = [];
+  const scalars: [string, string][] = [];
 
   for (const [name, value] of Object.entries(decoded)) {
     if (isTableArray(value)) {
@@ -60,7 +63,13 @@ export function parseToon(text: string): ToonDocument {
         ([k, v]) => [k, String(v)] as [string, string]
       );
       sections.push({ kind: 'properties', name, entries });
+    } else if (value !== null && (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean')) {
+      scalars.push([name, String(value)]);
     }
+  }
+
+  if (scalars.length > 0) {
+    sections.unshift({ kind: 'properties', name: '(document)', entries: scalars });
   }
 
   return { sections };

@@ -14,8 +14,21 @@
   },
   "icon": "icon.png",
   "categories": [
-    "Other"
+    "Formatters"
   ],
+  "keywords": [
+    "toon",
+    "table",
+    "viewer",
+    "tabular"
+  ],
+  "galleryBanner": {
+    "color": "#1e1e2e",
+    "theme": "dark"
+  },
+  "bugs": {
+    "url": "https://github.com/medvekoma/lookatoon/issues"
+  },
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
@@ -45,17 +58,22 @@
     ]
   },
   "scripts": {
-    "compile": "rm -rf out && node esbuild.mjs",
+    "compile": "node -e \"require('fs').rmSync('out', { recursive: true, force: true })\" && node esbuild.mjs",
     "watch": "node esbuild.mjs --watch",
     "check": "tsc --noEmit",
+    "test": "vitest run",
+    "lint": "eslint src",
     "package": "vsce package"
   },
   "devDependencies": {
-    "@types/node": "^18.0.0",
+    "@types/node": "^22.19.19",
     "@types/vscode": "^1.74.0",
     "@vscode/vsce": "^3.9.1",
     "esbuild": "^0.28.0",
-    "typescript": "^5.0.0"
+    "eslint": "^10.4.0",
+    "typescript": "^5.0.0",
+    "typescript-eslint": "^8.59.4",
+    "vitest": "^4.1.7"
   },
   "dependencies": {
     "@toon-format/toon": "^2.3.0"
