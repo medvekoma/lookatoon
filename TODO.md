@@ -42,7 +42,7 @@
   `style-src 'nonce-{value}'`. Risk is low here (scripts are disabled), but this is the
   documented pattern and will satisfy the Marketplace security scanner.
 
-- [ ] **Handle top-level scalar TOON values** (`toonParser.ts:51-63`)
+- [x] **Handle top-level scalar TOON values** (`toonParser.ts:51-63`)
   Scalar values at the top level (strings, numbers, booleans) are silently skipped.
   At minimum, document this as intentional; ideally render them in a "scalars" properties
   section or show a note in the webview.
