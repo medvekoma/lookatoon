@@ -14,8 +14,21 @@
   },
   "icon": "icon.png",
   "categories": [
-    "Other"
+    "Formatters"
   ],
+  "keywords": [
+    "toon",
+    "table",
+    "viewer",
+    "tabular"
+  ],
+  "galleryBanner": {
+    "color": "#1e1e2e",
+    "theme": "dark"
+  },
+  "bugs": {
+    "url": "https://github.com/medvekoma/lookatoon/issues"
+  },
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
@@ -45,7 +58,7 @@
     ]
   },
   "scripts": {
-    "compile": "rm -rf out && node esbuild.mjs",
+    "compile": "node -e \"require('fs').rmSync('out', { recursive: true, force: true })\" && node esbuild.mjs",
     "watch": "node esbuild.mjs --watch",
     "check": "tsc --noEmit",
     "package": "vsce package"
