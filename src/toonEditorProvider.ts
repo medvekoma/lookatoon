@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as crypto from 'crypto';
 import { parseToon, ToonDocument, ToonCell } from './toonParser';
 
 export class ToonEditorProvider implements vscode.CustomTextEditorProvider {
@@ -10,7 +11,6 @@ export class ToonEditorProvider implements vscode.CustomTextEditorProvider {
       ToonEditorProvider.viewType,
       new ToonEditorProvider(),
       {
-        webviewOptions: { retainContextWhenHidden: true },
         supportsMultipleEditorsPerDocument: false,
       }
     );
@@ -24,7 +24,8 @@ export class ToonEditorProvider implements vscode.CustomTextEditorProvider {
     webviewPanel.webview.options = { enableScripts: false };
 
     const refresh = () => {
-      webviewPanel.webview.html = buildHtml(parseToon(document.getText()));
+      const nonce = crypto.randomBytes(16).toString('base64');
+      webviewPanel.webview.html = buildHtml(parseToon(document.getText()), nonce);
     };
 
     refresh();
@@ -115,7 +116,7 @@ function renderTable(name: string, columns: string[], rows: ToonCell[][]): strin
 </section>`;
 }
 
-function buildHtml(doc: ToonDocument): string {
+function buildHtml(doc: ToonDocument, nonce: string): string {
   let body: string;
   if (doc.error) {
     body = `<div class="parse-error">${esc(doc.error)}</div>`;
@@ -136,8 +137,8 @@ function buildHtml(doc: ToonDocument): string {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline';">
-<style>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'nonce-${nonce}';">
+<style nonce="${nonce}">
 :root {
   --bg:        var(--vscode-editor-background);
   --surface:   var(--vscode-editorWidget-background);

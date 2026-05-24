@@ -37,7 +37,7 @@
 
 ## Medium
 
-- [ ] **Replace `'unsafe-inline'` CSP with a nonce** (`toonEditorProvider.ts:132`)
+- [x] **Replace `'unsafe-inline'` CSP with a nonce** (`toonEditorProvider.ts:132`)
   VS Code webview security best practices recommend generating a per-load nonce and using
   `style-src 'nonce-{value}'`. Risk is low here (scripts are disabled), but this is the
   documented pattern and will satisfy the Marketplace security scanner.
@@ -52,7 +52,7 @@
   detection. If a table's first column contains numbers, they appear as left-aligned
   plain text. Decide if this is intentional and document it, or make the heuristic smarter.
 
-- [ ] **Remove `retainContextWhenHidden: true`** (`toonEditorProvider.ts:13`)
+- [x] **Remove `retainContextWhenHidden: true`** (`toonEditorProvider.ts:13`)
   This keeps the webview process alive in memory when the tab is hidden. For a pure
   read-only renderer, recreating the HTML is cheap. Removing this option (the default
   is `false`) reduces memory use.
