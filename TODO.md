@@ -63,10 +63,10 @@
   No test files exist. At minimum, unit-test `parseToon` with valid files, empty input,
   and malformed input. Use `@vscode/test-electron` or `vitest` for the parser logic.
 
-- [ ] **Add ESLint**
+- [x] **Add ESLint**
   Add `eslint` + `@typescript-eslint/eslint-plugin` and an `npm run lint` script for
   consistent code style and catch common mistakes in CI.
 
-- [ ] **Verify the GitHub repository URL is public** (`package.json:10`)
+- [x] **Verify the GitHub repository URL is public** (`package.json:10`)
   `https://github.com/medvekoma/lookatoon` — confirm the repo exists and is public before
   submitting to the Marketplace, as the URL appears on the extension page.
