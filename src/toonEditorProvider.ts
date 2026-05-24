@@ -7,7 +7,7 @@ export class ToonEditorProvider implements vscode.CustomTextEditorProvider {
 
   static readonly viewType = 'toon.tableView';
 
-  static register(_context: vscode.ExtensionContext): vscode.Disposable {
+  static register(): vscode.Disposable {
     return vscode.window.registerCustomEditorProvider(
       ToonEditorProvider.viewType,
       new ToonEditorProvider(),

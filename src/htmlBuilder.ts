@@ -31,7 +31,6 @@ export function buildHtml(doc: ToonDocument, nonce: string): string {
   --muted:     var(--vscode-descriptionForeground);
   --heading:   var(--vscode-textLink-foreground);
   --col-head:  var(--vscode-editorInfo-foreground);
-  --dim:       var(--vscode-editor-foreground);
   --null:      var(--vscode-disabledForeground);
   --num:       var(--vscode-debugTokenExpression-number);
   --bool:      var(--vscode-debugTokenExpression-boolean);
@@ -82,7 +81,6 @@ td {
   white-space: nowrap;
 }
 tr:hover td { background: var(--hover); }
-.c-dim  { color: var(--dim); font-weight: 500; }
 .c-num  { text-align: right; color: var(--num); font-variant-numeric: tabular-nums; }
 .c-bool { color: var(--bool); }
 .c-null { color: var(--null); text-align: right; font-style: italic; }
@@ -112,12 +110,9 @@ function esc(s: string): string {
     .replace(/"/g, '&quot;');
 }
 
-function cellHtml(cell: ToonCell, isFirst: boolean): string {
+function cellHtml(cell: ToonCell): string {
   if (cell === null) {
     return `<td class="c-null">null</td>`;
-  }
-  if (isFirst) {
-    return `<td class="c-dim">${esc(String(cell))}</td>`;
   }
   if (typeof cell === 'number') {
     return `<td class="c-num">${esc(String(cell))}</td>`;
@@ -156,14 +151,12 @@ function isNumericCol(colIdx: number, rows: ToonCell[][]): boolean {
 
 function renderTable(name: string, columns: string[], rows: ToonCell[][]): string {
   const numericCols = columns.map((_, i) => isNumericCol(i, rows));
-  // Col 0 acts as a dim key column only when it contains non-numeric values.
-  const isKeyCol = columns.length > 0 && !numericCols[0];
   const headerCells = columns
     .map((c, i) => `<th${numericCols[i] ? ' class="c-num"' : ''}>${esc(c)}</th>`)
     .join('');
   const dataRows = rows
     .map(row => {
-      const cells = row.map((cell, idx) => cellHtml(cell, idx === 0 && isKeyCol)).join('');
+      const cells = row.map(cell => cellHtml(cell)).join('');
       return `<tr>${cells}</tr>`;
     })
     .join('');

@@ -4,17 +4,8 @@ Revision: 1.0
 Properties:
   year: 2026
   month: 6
-  day: 15
-Country[4]{code,name,population,capital}:
-  JP,Japan,125.8M,Tokyo
-  US,United States,331M,Washington D.C.
-  DE,Germany,83.1M,Berlin
-  FR,France,67.2M,Paris
-Fruit[3]{name,color,taste}:
-  Apple,Red,Sweet
-  Lemon,Yellow,Sour
-  Grape,Purple,Sweet
-Other[3]{id, name}:
-  1,Example
-  2,Test
-  102,Sample
+Country[4]{code,name,population,capital,capital_population}:
+  JP,Japan,125.8M,Tokyo,37.4M
+  US,United States,331M,Washington D.C.,0.7M
+  DE,Germany,83.1M,Berlin,3.7M
+  FR,France,67.2M,Paris,2.1M

@@ -5,9 +5,12 @@ A VS Code extension that renders [`.toon` files](https://github.com/toon-format/
 ## Features
 
 - Displays each TOON table section as a formatted HTML table
+- Displays top-level scalar values as a properties table
 - Right-aligns numeric and formatted-number columns (e.g. `3.3M`, `77.7K`)
 - Renders `null` values as muted italic `null`
-- Handles all valid TOON key and value types: strings, numbers, booleans, null
+- Handles all valid TOON value types: strings, numbers, booleans, null
+- Adapts to your VS Code color theme (light, dark, high-contrast)
+- Shows a clear error message when a file cannot be parsed
 
 Here's how a `.toon` file looks when opened in VS Code:
 
