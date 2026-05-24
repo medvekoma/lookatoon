@@ -116,13 +116,20 @@ function renderTable(name: string, columns: string[], rows: ToonCell[][]): strin
 }
 
 function buildHtml(doc: ToonDocument): string {
-  const body = doc.sections
-    .map(s =>
-      s.kind === 'properties'
-        ? renderProperties(s.name, s.entries)
-        : renderTable(s.name, s.columns, s.rows)
-    )
-    .join('\n');
+  let body: string;
+  if (doc.error) {
+    body = `<div class="parse-error">${esc(doc.error)}</div>`;
+  } else if (doc.sections.length === 0) {
+    body = `<div class="parse-error">No content to display.</div>`;
+  } else {
+    body = doc.sections
+      .map(s =>
+        s.kind === 'properties'
+          ? renderProperties(s.name, s.entries)
+          : renderTable(s.name, s.columns, s.rows)
+      )
+      .join('\n');
+  }
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -196,6 +203,14 @@ tr:hover td { background: var(--hover); }
 .c-null { color: var(--null); text-align: right; font-style: italic; }
 .props td { padding: 3px 12px; border-bottom: 1px solid var(--border); }
 .props .pk { color: var(--muted); width: 160px; }
+.parse-error {
+  color: var(--text);
+  background: var(--surface);
+  border-left: 4px solid var(--vscode-errorForeground, #f44);
+  border-radius: 4px;
+  padding: 12px 16px;
+  font-family: inherit;
+}
 </style>
 </head>
 <body>

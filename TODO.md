@@ -8,7 +8,7 @@
   Fix: use `var(--vscode-editor-background)`, `var(--vscode-editor-foreground)` etc., or add
   `.vscode-light` / `.vscode-high-contrast` CSS overrides using the body classes VS Code injects.
 
-- [ ] **Show an error/empty state in the webview** (`toonParser.ts:42-44`)  
+- [x] **Show an error/empty state in the webview** (`toonParser.ts:42-44`)  
   Parse failures silently return empty sections; users see a blank page with no explanation.  
   Fix: return a structured error from `parseToon` (or throw) and render a visible "Could not
   parse TOON file" message in `buildHtml`.
