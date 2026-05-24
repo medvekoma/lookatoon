@@ -12,7 +12,24 @@ A VS Code extension that renders [`.toon` files](https://github.com/toon-format/
 - Adapts to your VS Code color theme (light, dark, high-contrast)
 - Shows a clear error message when a file cannot be parsed
 
-Here's how a `.toon` file looks when opened in VS Code:
+## Example
+
+Here's a sample `.toon` file:
+
+```text
+Author: John Doe
+Revision: 1.0
+Properties:
+  year: 2026
+  month: 6
+Country[4]{code,name,population,capital,capital_population}:
+  JP,Japan,125.8M,Tokyo,37.4M
+  US,United States,331M,Washington D.C.,0.7M
+  DE,Germany,83.1M,Berlin,3.7M
+  FR,France,67.2M,Paris,2.1M
+```
+
+How it looks in look@toon:
 
 ![look@toon rendering a .toon file](example.png)
 

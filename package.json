@@ -2,7 +2,7 @@
   "name": "lookatoon",
   "displayName": "look@toon - TOON file viewer",
   "description": "Displays .toon files in a tabular format",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "medvekoma",
   "license": "MIT",
   "repository": {
