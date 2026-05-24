@@ -82,7 +82,6 @@ function renderProperties(name: string, entries: [string, string][]): string {
 }
 
 function isNumericCol(colIdx: number, rows: ToonCell[][]): boolean {
-  if (colIdx === 0) return false;
   for (const row of rows) {
     const cell = row[colIdx];
     if (cell === null) continue;
@@ -95,12 +94,14 @@ function isNumericCol(colIdx: number, rows: ToonCell[][]): boolean {
 
 function renderTable(name: string, columns: string[], rows: ToonCell[][]): string {
   const numericCols = columns.map((_, i) => isNumericCol(i, rows));
+  // Col 0 acts as a dim key column only when it contains non-numeric values.
+  const isKeyCol = columns.length > 0 && !numericCols[0];
   const headerCells = columns
     .map((c, i) => `<th${numericCols[i] ? ' class="c-num"' : ''}>${esc(c)}</th>`)
     .join('');
   const dataRows = rows
     .map(row => {
-      const cells = row.map((cell, idx) => cellHtml(cell, idx === 0)).join('');
+      const cells = row.map((cell, idx) => cellHtml(cell, idx === 0 && isKeyCol)).join('');
       return `<tr>${cells}</tr>`;
     })
     .join('');

@@ -4,10 +4,10 @@ Properties:
   month: 6
   day: 15
 Country[4]{code,name,population,capital}:
-  JP,Japan,125800000,Tokyo
-  US,United States,331000000,Washington D.C.
-  DE,Germany,83000000,Berlin
-  FR,France,67000000,Paris
+  JP,Japan,125.8M,Tokyo
+  US,United States,331M,Washington D.C.
+  DE,Germany,83.1M,Berlin
+  FR,France,67.2M,Paris
 Fruit[3]{name,color,taste}:
   Apple,Red,Sweet
   Lemon,Yellow,Sour

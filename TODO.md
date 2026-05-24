@@ -47,7 +47,7 @@
   At minimum, document this as intentional; ideally render them in a "scalars" properties
   section or show a note in the webview.
 
-- [ ] **Clarify first-column-as-key behaviour** (`toonEditorProvider.ts:56,84`)
+- [x] **Clarify first-column-as-key behaviour** (`toonEditorProvider.ts:56,84`)
   Column 0 is unconditionally rendered as a dim key column and excluded from numeric
   detection. If a table's first column contains numbers, they appear as left-aligned
   plain text. Decide if this is intentional and document it, or make the heuristic smarter.
