@@ -12,3 +12,7 @@ Fruit[3]{name,color,taste}:
   Apple,Red,Sweet
   Lemon,Yellow,Sour
   Grape,Purple,Sweet
+Other[3]{id, name}:
+  1,Example
+  2,Test
+  102,Sample

@@ -132,18 +132,18 @@ function buildHtml(doc: ToonDocument): string {
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline';">
 <style>
 :root {
-  --bg:        #1e1e2e;
-  --surface:   #24273a;
-  --border:    #363a4f;
-  --text:      #cad3f5;
-  --muted:     #6e738d;
-  --heading:   #c6a0f6;
-  --col-head:  #8aadf4;
-  --dim:       #cad3f5;
-  --null:      #6e738d;
-  --num:       #91d7e3;
-  --bool:      #a6da95;
-  --hover:     #2a2d3d;
+  --bg:        var(--vscode-editor-background);
+  --surface:   var(--vscode-editorWidget-background);
+  --border:    var(--vscode-panel-border, var(--vscode-editorWidget-border));
+  --text:      var(--vscode-editor-foreground);
+  --muted:     var(--vscode-descriptionForeground);
+  --heading:   var(--vscode-textLink-foreground);
+  --col-head:  var(--vscode-editorInfo-foreground);
+  --dim:       var(--vscode-editor-foreground);
+  --null:      var(--vscode-disabledForeground);
+  --num:       var(--vscode-debugTokenExpression-number);
+  --bool:      var(--vscode-debugTokenExpression-boolean);
+  --hover:     var(--vscode-list-hoverBackground);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
