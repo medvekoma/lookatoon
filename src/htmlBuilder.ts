@@ -32,8 +32,6 @@ export function buildHtml(doc: ToonDocument, nonce: string): string {
   --heading:   var(--vscode-textLink-foreground);
   --col-head:  var(--vscode-editorInfo-foreground);
   --null:      var(--vscode-disabledForeground);
-  --num:       var(--vscode-debugTokenExpression-number);
-  --bool:      var(--vscode-debugTokenExpression-boolean);
   --hover:     var(--vscode-list-hoverBackground);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -81,10 +79,8 @@ td {
   white-space: nowrap;
 }
 tr:hover td { background: var(--hover); }
-.c-num  { text-align: right; color: var(--num); font-variant-numeric: tabular-nums; }
-.c-bool { color: var(--bool); }
-.c-null { color: var(--null); text-align: right; font-style: italic; }
-.props td { padding: 3px 12px; border-bottom: 1px solid var(--border); }
+.c-num  { text-align: right; font-variant-numeric: tabular-nums; }
+.c-null { color: var(--null); font-style: italic; }
 .props .pk { color: var(--muted); width: 160px; }
 .parse-error {
   color: var(--text);
@@ -110,21 +106,44 @@ function esc(s: string): string {
     .replace(/"/g, '&quot;');
 }
 
-function cellHtml(cell: ToonCell): string {
-  if (cell === null) {
-    return `<td class="c-null">null</td>`;
+type ColType = 'num' | 'bool' | 'str';
+const NUM_RE = /^-?[\d,.]+[KMBkmb%]?$/;
+const MAX_TYPE_SAMPLE = 1000;
+
+function detectColType(colIdx: number, rows: ToonCell[][]): ColType {
+  let type: ColType | undefined;
+  const limit = Math.min(rows.length, MAX_TYPE_SAMPLE);
+  for (let i = 0; i < limit; i++) {
+    const cell = rows[i][colIdx];
+    if (cell === null) continue;
+    const cellType: ColType =
+      typeof cell === 'number' || (typeof cell === 'string' && NUM_RE.test(cell))
+        ? 'num'
+        : typeof cell === 'boolean'
+        ? 'bool'
+        : 'str';
+    if (type === undefined) {
+      type = cellType;
+    } else if (type !== cellType) {
+      return 'str';
+    }
   }
-  if (typeof cell === 'number') {
-    return `<td class="c-num">${esc(String(cell))}</td>`;
+  return type ?? 'str';
+}
+
+function cellHtml(cell: ToonCell, colType: ColType): string {
+  if (cell === null) {
+    return colType === 'num'
+      ? `<td class="c-null c-num">null</td>`
+      : `<td class="c-null">null</td>`;
   }
   if (typeof cell === 'boolean') {
-    return `<td class="c-bool">${cell ? 'true' : 'false'}</td>`;
+    return `<td>${cell ? 'true' : 'false'}</td>`;
   }
-  // String — right-align if it looks like a formatted number (e.g. 3.3M, 77.7K)
-  if (/^-?[\d,.]+[KMBkmb%]?$/.test(cell)) {
-    return `<td class="c-num">${esc(cell)}</td>`;
-  }
-  return `<td>${esc(cell)}</td>`;
+  const text = esc(String(cell));
+  return colType === 'num'
+    ? `<td class="c-num">${text}</td>`
+    : `<td>${text}</td>`;
 }
 
 function renderProperties(name: string, entries: [string, string][]): string {
@@ -138,25 +157,17 @@ function renderProperties(name: string, entries: [string, string][]): string {
 </section>`;
 }
 
-function isNumericCol(colIdx: number, rows: ToonCell[][]): boolean {
-  for (const row of rows) {
-    const cell = row[colIdx];
-    if (cell === null) continue;
-    if (typeof cell === 'number') return true;
-    if (typeof cell === 'string' && /^-?[\d,.]+[KMBkmb%]?$/.test(cell)) return true;
-    return false;
-  }
-  return false;
-}
-
 function renderTable(name: string, columns: string[], rows: ToonCell[][]): string {
-  const numericCols = columns.map((_, i) => isNumericCol(i, rows));
+  const colTypes = columns.map((_, i) => detectColType(i, rows));
   const headerCells = columns
-    .map((c, i) => `<th${numericCols[i] ? ' class="c-num"' : ''}>${esc(c)}</th>`)
+    .map((c, i) => {
+      const cls = colTypes[i] === 'num' ? ' class="c-num"' : '';
+      return `<th${cls}>${esc(c)}</th>`;
+    })
     .join('');
   const dataRows = rows
     .map(row => {
-      const cells = row.map(cell => cellHtml(cell)).join('');
+      const cells = row.map((cell, i) => cellHtml(cell, colTypes[i])).join('');
       return `<tr>${cells}</tr>`;
     })
     .join('');

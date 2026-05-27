@@ -38,8 +38,8 @@ describe('buildHtml', () => {
       }],
     };
     const html = buildHtml(doc, 'nonce');
-    expect(html).toContain('<td class="c-bool">true</td>');
-    expect(html).toContain('<td class="c-bool">false</td>');
+    expect(html).toContain('<td>true</td>');
+    expect(html).toContain('<td>false</td>');
   });
 
   it('renders null cells with c-null class', () => {

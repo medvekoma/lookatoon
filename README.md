@@ -17,16 +17,22 @@ A VS Code extension that renders [`.toon` files](https://github.com/toon-format/
 Here's a sample `.toon` file:
 
 ```text
-Author: John Doe
-Revision: 1.0
-Properties:
-  year: 2026
-  month: 6
-Country[4]{code,name,population,capital,capital_population}:
-  JP,Japan,125.8M,Tokyo,37.4M
-  US,United States,331M,Washington D.C.,0.7M
-  DE,Germany,83.1M,Berlin,3.7M
-  FR,France,67.2M,Paris,2.1M
+Name: look@toon
+Revision: 0.1
+Resources:
+  Source Code: https://github.com/medvekoma/lookatoon
+  Marketplace: https://marketplace.visualstudio.com/items?itemName=medvekoma.lookatoon
+Example Countries[4]{code,name,population,capital,is_eu}:
+  DE,Germany,83.24M,Berlin,true
+  HU,Hungary,9.77M,Budapest,true
+  AN,Andorra,77.28K,Andorra la Vella,false
+  US,United States,331.42M,Washington D.C.,false
+Example Languages[5]{code,name,native_speakers,non_native_speakers}:
+  en,English,360M,1.5B
+  de,German,76M,132M
+  hu,Hungarian,13M,2M
+  es,Spanish,480M,74M
+  la,Latin,null,100K
 ```
 
 How it looks in look@toon:
@@ -39,18 +45,21 @@ Open any `.toon` file — the table view activates automatically.
 
 To switch back to the raw text editor: right-click the tab → **Reopen Editor With…** → select the default text editor.
 
-## Build & Install
+## Developer Support
+
+### Build & Install
 
 ```bash
 npm install
 npm run package
-code --install-extension lookatoon-0.1.0.vsix
+# Update .vsix file name if needed
+code --install-extension lookatoon-0.1.2.vsix
 ```
 
-## Requirements
+### Requirements
 
 VS Code 1.74 or later.
 
-## License
+### License
 
 MIT
